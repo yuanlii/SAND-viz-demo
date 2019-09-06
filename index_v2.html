@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <script src="script_v2.js"></script>
+
+    <style>
+      path {
+        fill: #ccc;
+        stroke: #fff;
+        stroke-width: 0.5px;
+      }
+
+      circle {
+        fill: #fff;
+        fill-opacity: 0.4;
+        stroke: #111;
+      }
+
+      path.active {
+        fill: pink;
+      }
+
+      circle.active {
+        fill: blue;
+      }
+
+      .links line {
+        stroke: #999;
+        stroke-opacity: 0.6;
+      }
+
+      .nodes circle {
+        stroke: #fff;
+        stroke-width: 1.5px;
+      }
+
+      .highlight {
+        opacity: 1 !important;
+        stroke: red !important;
+        stroke-width: 2px !important;
+        stroke-opacity: 0.8 !important;
+      }
+    </style>
+    <link href="langnet.css" rel="stylesheet" type="text/css" />
+    <link href="my.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <!-- Create an element where the map will take place -->
+    <!-- <svg id="my_dataviz" width="440" height="400"></svg> -->
+    <!-- <svg id="my_dataviz" width="960" height="500"></svg> -->
+
+    <div class="my-viz">
+      <div id="toolbox">
+        <p id="titlep"></p>
+        <div id="title">perSONAR network</div>
+        <br />
+        <a class="boton" href="google.com" target="_blank">SAND.com</a>
+        <a class="boton" href="#" onclick="about();return false;"
+          >How it works</a
+        >
+        <p></p>
+
+        <div id="chartSelector" class="ui-buttonset">
+          <input
+            type="radio"
+            value="network"
+            id="networkOption"
+            name="chartOption"
+            checked="checked"
+            class="ui-helper-hidden-accessible"
+          />
+
+          <label
+            for="networkOption"
+            class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left ui-state-active"
+            aria-pressed="true"
+            role="button"
+            aria-disabled="false"
+          >
+            <span class="ui-button-text">map</span>
+          </label>
+          <input
+            type="radio"
+            value="chord"
+            id="chordOption"
+            name="chartOption"
+            class="ui-helper-hidden-accessible"
+          />
+
+          <label
+            for="chordOption"
+            aria-pressed="false"
+            class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right"
+            role="button"
+            aria-disabled="false"
+          >
+            <span class="ui-button-text">chord</span>
+          </label>
+        </div>
+        <p></p>
+
+        <div id="sliderContainer">
+          "time selector: "
+          <span id="similarity">last 15 min</span>
+          <div
+            id="slider"
+            class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+          >
+            <a class="ui-slider-handle ui-state-default ui-corner-all"></a>
+          </div>
+        </div>
+
+        <div id="language_information">
+          "src-dest: "
+          <a
+            href="http://en.wikipedia.org/wiki/Afrikaans_language"
+            target="_blank"
+            >source host</a
+          >
+          <br />
+          <br />
+        </div>
+      </div>
+
+      <div id="container"></div>
+    </div>
+  </body>
+</html>
